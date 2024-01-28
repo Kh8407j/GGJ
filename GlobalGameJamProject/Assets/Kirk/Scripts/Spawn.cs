@@ -7,12 +7,17 @@ namespace Level
 {
     public class Spawn : MonoBehaviour
     {
-        [SerializeField][Range(1, 4)] int playerIndex = 1;
+        private int playerIndex = 1;
         [SerializeField] GameObject playerBlueprint;
 
         public void SpawnPlayer()
         {
             GameObject plr = Instantiate(playerBlueprint, transform.position, Quaternion.identity);
+        }
+
+        public void SetPlayerIndex(int index)
+        {
+            playerIndex = index;
         }
     }
 }

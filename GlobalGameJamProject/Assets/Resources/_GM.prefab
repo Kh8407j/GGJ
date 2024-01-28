@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8068777987472762071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3417793730940007343}
+  - component: {fileID: 9155635329649357432}
+  m_Layer: 0
+  m_Name: _GM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3417793730940007343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068777987472762071}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9155635329649357432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068777987472762071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763409254714d9a498cfbc28be8a7309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - uiColour:
+      serializedVersion: 2
+      rgba: 4283716834
+    inputDevice: 0
+    selectedCharacter: 0
+  - uiColour:
+      serializedVersion: 2
+      rgba: 4292436538
+    inputDevice: 0
+    selectedCharacter: 0
+  - uiColour:
+      serializedVersion: 2
+      rgba: 4283419216
+    inputDevice: 0
+    selectedCharacter: 0
+  - uiColour:
+      serializedVersion: 2
+      rgba: 4284599295
+    inputDevice: 0
+    selectedCharacter: 0
+  characters:
+  - name: Cal
+    description: The mad lad himself.
+    uiImage: {fileID: 0}
+    playerBlueprint: {fileID: 0}
+  - name: Aiden
+    description: He ain't about to be the only one on crutches real soon.
+    uiImage: {fileID: 0}
+    playerBlueprint: {fileID: 0}
+  - name: Jay
+    description: '"I got a shandoleer!"'
+    uiImage: {fileID: 0}
+    playerBlueprint: {fileID: 0}

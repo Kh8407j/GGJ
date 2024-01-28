@@ -1,4 +1,5 @@
 // KHOGDEN 001115381
+using Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,13 @@ namespace Level
         private void Awake()
         {
             instance = this;
+        }
+
+        // KH - Called upon the first frame.
+        private void Start()
+        {
+            // KH - Plays menu music.
+            MusicPlayer.instance.Play("Last Student Standing");
         }
 
         // Update is called once per frame
@@ -82,6 +90,7 @@ namespace Level
         IEnumerator IGenerateLevel()
         {
             int spawnIndex = 0;
+            MusicPlayer.instance.Stop();
 
             // KH - Generate the level with the user's inputted seed.
             if (seedInput.text != "")
@@ -104,6 +113,7 @@ namespace Level
                         // KH - Instantiate player spawn tiles.
                         GameObject t = Instantiate(playerSpawn, pos, Quaternion.identity, transform);
                         t.GetComponent<SpriteRenderer>().color = playerSpawnColours[spawnIndex];
+                        t.GetComponent<Spawn>().SetPlayerIndex(spawnIndex + 1);
 
                         spawnIndex++;
                     }
@@ -129,8 +139,12 @@ namespace Level
 
             // KH - Spawn all players once the level is generated.
             Spawn[] spawns = FindObjectsOfType<Spawn>();
-            foreach (Spawn s in spawns)
-                s.SpawnPlayer();
+            for(int i = 0; i < spawns.Length; i++)
+            {
+                // Spawn a playable character for each player playing.
+                if (GameManager.instance.GetPlayer(i).InputDevice != Controllers.PlayerController.InputDevice.none)
+                    spawns[i].SpawnPlayer();
+            }
 
             // KH - Begin the process of progressively replacing tiles with killzone tiles.
             pauseTimer = false;

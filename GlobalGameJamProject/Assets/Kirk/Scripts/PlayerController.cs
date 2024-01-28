@@ -7,7 +7,7 @@ namespace Controllers
 {
     public class PlayerController : MonoBehaviour
     {
-        private enum InputDevice { none, keyboard, gamepad1, gamepad2, gamepad3, gamepad4 };
+        public enum InputDevice { none, keyboard, gamepad1, gamepad2, gamepad3, gamepad4 };
         [SerializeField] InputDevice inputDevice;
 
         // KH - Calculated input variables.
@@ -29,7 +29,7 @@ namespace Controllers
         // KH - Called upon the first frame.
         void Start()
         {
-            motor.RegisterInputAbility("Hammer", 0.15f);
+            motor.RegisterInputAbility("Punch", 0.15f);
             motor.RegisterInputAbility("Cream Pie", 0.75f);
             motor.RegisterInputAbility("Balloon", 0.25f);
             motor.RegisterInputAbility("Banana", 0.5f);
@@ -68,7 +68,7 @@ namespace Controllers
         {
             motor.Horizontal = hor;
             motor.Vertical = ver;
-            motor.GetInputAbility("Hammer").HoldingInput = holdingAtk1;
+            motor.GetInputAbility("Punch").HoldingInput = holdingAtk1;
             motor.GetInputAbility("Cream Pie").HoldingInput = holdingAtk2;
             motor.GetInputAbility("Balloon").HoldingInput = holdingAtk3;
             motor.GetInputAbility("Banana").HoldingInput = holdingAtk4;
