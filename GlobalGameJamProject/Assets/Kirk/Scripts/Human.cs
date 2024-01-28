@@ -11,6 +11,9 @@ namespace Entity
         private Health health;
         private Motor motor;
 
+        // KH - Projectiles.
+        [SerializeField] GameObject punchObj;
+
         // KH - Called before 'void Start()'.
         private void Awake()
         {
@@ -24,6 +27,45 @@ namespace Entity
             // KH - Stop the human from being able to move around once they're dead.
             if(health.Dead)
                 motor.enabled = false;
+
+            Motor.InputAbility punch = motor.GetInputAbility("Punch");
+            if (punch.HoldingInput && !punch.OnCooldown())
+            {
+                punch.StartCooldown();
+                Instantiate(punchObj, motor.GetFacingFirepoint().position, Quaternion.identity);
+                Projectile p = punchObj.GetComponent<Projectile>();
+
+                // KH - Set the facing/moving direction of the projectile.
+                if (motor.GetFacingDirection() == Motor.Direction.north)
+                {
+                    p.SetFacingDirection(Projectile.Direction.north);
+                    p.SetMoveDirection(Vector3.up);
+                }
+                else if (motor.GetFacingDirection() == Motor.Direction.east)
+                {
+                    p.SetFacingDirection(Projectile.Direction.east);
+                    p.SetMoveDirection(Vector3.right);
+                }
+                else if (motor.GetFacingDirection() == Motor.Direction.south)
+                {
+                    p.SetFacingDirection(Projectile.Direction.south);
+                    p.SetMoveDirection(Vector3.down);
+                }
+                else if (motor.GetFacingDirection() == Motor.Direction.west)
+                {
+                    p.SetFacingDirection(Projectile.Direction.west);
+                    p.SetMoveDirection(Vector3.left);
+                }
+            }
+
+            Motor.InputAbility fire = motor.GetInputAbility("Fire");
+            if (fire.HoldingInput && !fire.OnCooldown())
+            {
+
+            }
+
+            if (health.Dead)
+                Destroy(gameObject);
         }
 
         // KH - Called upon collision with a trigger collider.

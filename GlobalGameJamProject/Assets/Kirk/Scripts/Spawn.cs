@@ -1,4 +1,6 @@
 // KHOGDEN 001115381
+using Controllers;
+using Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,11 +15,14 @@ namespace Level
         public void SpawnPlayer()
         {
             GameObject plr = Instantiate(playerBlueprint, transform.position, Quaternion.identity);
+            plr.GetComponent<PlayerController>().SetInputDevice(GameManager.instance.GetPlayer(playerIndex - 1).InputDevice);
+            plr.GetComponentInChildren<SpriteRenderer>().sprite = GameManager.instance.GetCharacter(GameManager.instance.GetPlayer(playerIndex - 1).SelectedCharacter).GetUiImage();
         }
 
-        public void SetPlayerIndex(int index)
+        public int PlayerIndex
         {
-            playerIndex = index;
+            get { return playerIndex; }
+            set { playerIndex = value; }
         }
     }
 }

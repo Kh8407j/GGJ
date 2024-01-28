@@ -68,13 +68,9 @@ MonoBehaviour:
   characters:
   - name: Cal
     description: The mad lad himself.
-    uiImage: {fileID: 0}
+    uiImage: {fileID: 21300000, guid: 9cfb99a2fb7bede4bba7c3e77fdebe1b, type: 3}
     playerBlueprint: {fileID: 0}
   - name: Aiden
     description: He ain't about to be the only one on crutches real soon.
-    uiImage: {fileID: 0}
-    playerBlueprint: {fileID: 0}
-  - name: Jay
-    description: '"I got a shandoleer!"'
-    uiImage: {fileID: 0}
+    uiImage: {fileID: 21300000, guid: 16d5f0ae231de2e458554c935891e9b5, type: 3}
     playerBlueprint: {fileID: 0}

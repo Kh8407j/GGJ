@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 
 namespace Managers
@@ -71,20 +72,7 @@ namespace Managers
 
         private void Awake()
         {
-            // KH - Makes sure game manager can carry data between scenes.
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else if (instance != this)
-                Destroy(gameObject);
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
+            instance = this;
         }
 
         // Update is called once per frame
@@ -119,6 +107,9 @@ namespace Managers
                         AssignDevice(playerIndex, PlayerController.InputDevice.gamepad4);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.F5))
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         // KH - Assign a player with the device they're trying to use.
@@ -150,6 +141,11 @@ namespace Managers
         public Character GetCharacter(int index)
         {
             return characters[index];
+        }
+
+        public int GetCharacterListCount()
+        {
+            return characters.Count;
         }
     }
 }

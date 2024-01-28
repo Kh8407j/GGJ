@@ -30,9 +30,7 @@ namespace Controllers
         void Start()
         {
             motor.RegisterInputAbility("Punch", 0.15f);
-            motor.RegisterInputAbility("Cream Pie", 0.75f);
-            motor.RegisterInputAbility("Balloon", 0.25f);
-            motor.RegisterInputAbility("Banana", 0.5f);
+            motor.RegisterInputAbility("Fire", 0.75f);
         }
 
         // KH - Called on a constant timeline.
@@ -69,9 +67,12 @@ namespace Controllers
             motor.Horizontal = hor;
             motor.Vertical = ver;
             motor.GetInputAbility("Punch").HoldingInput = holdingAtk1;
-            motor.GetInputAbility("Cream Pie").HoldingInput = holdingAtk2;
-            motor.GetInputAbility("Balloon").HoldingInput = holdingAtk3;
-            motor.GetInputAbility("Banana").HoldingInput = holdingAtk4;
+            motor.GetInputAbility("Fire").HoldingInput = holdingAtk2;
+        }
+
+        public void SetInputDevice(InputDevice d)
+        {
+            inputDevice = d;
         }
     }
 }

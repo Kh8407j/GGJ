@@ -19,7 +19,7 @@ namespace Controllers
         [SerializeField] Transform firepointRight;
 
         // KH - Used to read what direction the motor is facing.
-        private enum Direction { north, east, south, west };
+        public enum Direction { north, east, south, west };
         [SerializeField] Direction facingDirection;
 
         // KH - Outputted variables from controller script.
@@ -43,7 +43,7 @@ namespace Controllers
             // KH - Method to see if this ability is on cooldown.
             public bool OnCooldown()
             {
-                return cooldownTimer == 0f;
+                return cooldownTimer > 0f;
             }
 
             public float GetCooldownTime()
@@ -61,6 +61,11 @@ namespace Controllers
             {
                 get { return holdingInput; }
                 set { holdingInput = value; }
+            }
+
+            public void StartCooldown()
+            {
+                cooldownTimer = cooldownTime;
             }
             #endregion
 
@@ -109,9 +114,6 @@ namespace Controllers
         // KH - Called upon every frame.
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-                Push(Vector2.down, 5f);
-
             Move();
 
             foreach (InputAbility i in inputAbilities)
@@ -125,7 +127,7 @@ namespace Controllers
 
             // KH - decrease the multiplier over time until it's at zero.
             if(pushDirection.Multiplier > 0f)
-                pushDirection.Multiplier -= Time.deltaTime;
+                pushDirection.Multiplier -=  10f * Time.deltaTime;
             else if(pushDirection.Multiplier < 0f)
                 pushDirection.Multiplier = 0f;
         }
@@ -135,10 +137,6 @@ namespace Controllers
         {
             float x = hor;
             float y = ver;
-
-            // KH - This prevents diagonal movement.
-            if (hor != 0f)
-                y = 0f;
 
             Vector2 moveDir = new Vector2(x, y);
             transform.Translate(moveDir * (moveSpeed / 2f) * Time.deltaTime + (pushDirection.Direction * pushDirection.Multiplier) * Time.deltaTime);
@@ -192,6 +190,23 @@ namespace Controllers
 
             Debug.LogWarning("Could not find scriptable input ability name: " + abilityName);
             return null;
+        }
+
+        public Direction GetFacingDirection()
+        {
+            return facingDirection;
+        }
+
+        public Transform GetFacingFirepoint()
+        {
+            if (facingDirection == Direction.north)
+                return firepointUp;
+            else if(facingDirection == Direction.east)
+                return firepointRight;
+            else if (facingDirection == Direction.south)
+                return firepointDown;
+            else
+                return firepointLeft;
         }
         #endregion
     }

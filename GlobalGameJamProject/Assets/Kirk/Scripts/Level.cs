@@ -12,6 +12,7 @@ namespace Level
         public static Level instance;
         [SerializeField] float levelGenerateSpeedRate = 0.01f;
         [SerializeField] Text seedInput;
+        [SerializeField] GameObject killzoneHolders;
 
         [Header("Level Attributes")]
         [SerializeField] int width = 50;
@@ -113,7 +114,7 @@ namespace Level
                         // KH - Instantiate player spawn tiles.
                         GameObject t = Instantiate(playerSpawn, pos, Quaternion.identity, transform);
                         t.GetComponent<SpriteRenderer>().color = playerSpawnColours[spawnIndex];
-                        t.GetComponent<Spawn>().SetPlayerIndex(spawnIndex + 1);
+                        t.GetComponent<Spawn>().PlayerIndex = spawnIndex + 1;
 
                         spawnIndex++;
                     }
@@ -142,12 +143,13 @@ namespace Level
             for(int i = 0; i < spawns.Length; i++)
             {
                 // Spawn a playable character for each player playing.
-                if (GameManager.instance.GetPlayer(i).InputDevice != Controllers.PlayerController.InputDevice.none)
+                if (GameManager.instance.GetPlayer(spawns[i].PlayerIndex - 1).InputDevice != Controllers.PlayerController.InputDevice.none)
                     spawns[i].SpawnPlayer();
             }
 
             // KH - Begin the process of progressively replacing tiles with killzone tiles.
             pauseTimer = false;
+            killzoneHolders.SetActive(true);
         }
     }
 }
